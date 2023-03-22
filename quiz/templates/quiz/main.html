@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block scripts %}
+    <script src="{% static 'quiz/main.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+home
+{% endblock title %}
+
+{% block content %}
+<style>
+  body{
+          background: linear-gradient(90deg, #9803dc9b 0%, #5899ee32 43%, #0bc4689d 100%);
+          font-family: 'Nunito', sans-serif;
+          padding-top: 50px;
+      
+  }
+</style>
+<div class="body">
+    <!-- Modal -->
+    <div class="modal fade" id="QuizStartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Start?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal-body-confirm"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">no</button>
+            <button type="button" id="start-button" class="btn btn-success">yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  <div class="h1">Quiz List</div>
+  <h6><small></small>Click on which quiz you want submit...</small></h6>
+  <hr>
+  {% for obj in object_list %}
+    <button class="btn btn-link modal-button" data-pk="{{obj.pk}}" data-quiz="{{obj.name}}" data-questions="{{obj.question_number}}" data-difficulty="{{obj.difficulty}}" data-time="{{obj.time}}" data-require="{{obj.required_score}}" data-toggle="modal" data-target="#QuizStartModal">{{obj.name}}</button><br>
+  {% endfor %}
+</div>
+
+
+{% endblock content %}
+
